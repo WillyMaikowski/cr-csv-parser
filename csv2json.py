@@ -7,7 +7,7 @@ import sys
 import io
 import re
 
-cast = { 'string': str, 'int': int, 'boolean': ( lambda x: x == 'true' ) }
+cast = { 'string': str, 'int': int, 'boolean': ( lambda x: x.lower() == 'true' ) }
 
 def camel2snake( s ):
     if isinstance( s, list ): return [ camel2snake( sub ) for sub in s ]
@@ -54,7 +54,9 @@ def csv2json( filepath ):
         data.append( d  )
 
     f.close()
-    if len( data ) <= 0: return
+    if len( data ) <= 0:
+        print( 'Empty file: ', filepath )
+        return
 
     filepath = filepath.split( '/' )
     if len( filepath ) > 1: filepath.pop( 0 )
