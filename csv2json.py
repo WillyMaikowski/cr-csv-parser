@@ -17,7 +17,7 @@ def camel2snake( s ):
 def csv2json( filepath ):
     f = io.open( filepath, 'r', encoding='utf-8' )
     rows = csv.reader( f )
-    print( filepath )
+    #print( filepath )
 
     line = 0
     data = []
@@ -33,8 +33,8 @@ def csv2json( filepath ):
             continue
 
         if len( cols ) != len( r ):
-            print( 'No se ha podido convertir archivo ', filepath, '. linea:', line )
-            return
+            print( 'Bad line in file ', filepath, '. Ignored line:', line )
+            continue
 
         d = {}
         if r[0] == '': d = data.pop()
@@ -72,13 +72,13 @@ if __name__ == '__main__':
 
     indir = sys.argv[1]
     if not indir:
-        print( 'Debe ingresar un directorio o un archivo' )
+        print( 'You must add a filename or directory' )
         quit()
 
 
     if os.path.isfile( indir ):
         if os.path.splitext( indir )[1] != '.csv':
-            print( 'El archivo debe ser csv' )
+            print( 'The file have to be csv' )
         else:
             csv2json( indir )
         quit()
