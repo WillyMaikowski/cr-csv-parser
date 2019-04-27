@@ -38,6 +38,10 @@ def csv2json( filepath ):
 
         d = {}
         if r[0] == '': d = data.pop()
+
+        if not d: subkey = 0
+        if d: subkey += 1
+
         for i in range( len( cols ) ):
             if r[i] == '': continue
 
@@ -46,10 +50,13 @@ def csv2json( filepath ):
 
             if key not in d:
                 d[key] = value
-            elif isinstance( d[key], list ):
-                d[key].append( value )
+            elif isinstance( d[key], dict ):
+                d[key][subkey] = value
             else:
-                d[key] = [ d[key], value ]
+                aux = d[key]
+                d[key] = {}
+                d[key][subkey-1] = aux
+                d[key][subkey] = value
 
         data.append( d  )
 
