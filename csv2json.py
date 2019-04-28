@@ -4,7 +4,6 @@ import csv
 import json
 import os
 import sys
-import io
 import re
 
 cast = { 'string': str, 'int': int, 'boolean': ( lambda x: x.lower() == 'true' ) }
@@ -15,9 +14,8 @@ def camel2snake( s ):
     return re.sub( '([a-z0-9])([A-Z])', r'\1_\2', s1 ).lower()
 
 def csv2json( filepath ):
-    f = io.open( filepath, 'r', encoding='utf-8' )
+    f = open( filepath, 'r', encoding='utf-8' )
     rows = csv.reader( f )
-    #print( filepath )
 
     line = 0
     data = []
@@ -72,14 +70,14 @@ def csv2json( filepath ):
     newpath = os.path.splitext( newpath )[0]+'.json'
     os.makedirs( os.path.dirname( newpath ), exist_ok=True )
     f = open( newpath, 'w' )
-    f.write( json.dumps( data, sort_keys=True, indent=4 ) )
+    f.write( json.dumps( data, indent=4 ) )
     f.close()
 
 
 
 if __name__ == '__main__':
-
     indir = sys.argv[1]
+
     if not indir:
         print( 'You must add a filename or directory' )
         quit()
