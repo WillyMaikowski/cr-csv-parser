@@ -110,5 +110,6 @@ if __name__ == '__main__':
 
     for path, _, filenames in os.walk(indir):
         for filename in filenames:
-            if os.path.splitext(filename)[1] != '.csv': continue
+            if os.path.splitext(filename)[1] != '.csv':
+                continue
             csv2json(os.path.join(path, filename))
