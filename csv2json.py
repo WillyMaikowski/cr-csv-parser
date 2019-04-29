@@ -75,23 +75,23 @@ def read_csv(filepath):
     return data
 
 
-def csv2json(filepath):
-    data = read_csv(filepath)
+def csv2json(csv_path, ensure_ascii=False):
+    data = read_csv(csv_path)
 
     if len(data) <= 0:
-        print('Empty file: ', filepath)
+        print('Empty file: ', csv_path)
         return
 
-    filepath = filepath.split('/')
-    if len(filepath) > 1:
-        filepath.pop(0)
+    csv_path = csv_path.split('/')
+    if len(csv_path) > 1:
+        csv_path.pop(0)
 
-    newpath = os.path.join('json/', '/'.join(filepath))
+    newpath = os.path.join('json/', '/'.join(csv_path))
     newpath = os.path.splitext(newpath)[0] + '.json'
     os.makedirs(os.path.dirname(newpath), exist_ok=True)
 
     with open(newpath, 'w') as f:
-        json.dump(data, f, indent=4)
+        json.dump(data, f, indent=4, ensure_ascii=ensure_ascii)
 
 
 if __name__ == '__main__':
