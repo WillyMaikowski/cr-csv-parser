@@ -9,7 +9,10 @@ import sys
 cast = {
     'string': str,
     'int': int,
-    'boolean': (lambda x: x.lower() == 'true')
+    'boolean': (lambda x: x.lower() == 'true'),
+    'intarray': int,
+    'stringarray': str,
+    'booleanarray': bool,
 }
 
 
