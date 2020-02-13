@@ -12,7 +12,7 @@ cast = {
     'boolean': (lambda x: x.lower() == 'true'),
     'intarray': int,
     'stringarray': str,
-    'booleanarray': bool,
+    'booleanarray': (lambda x: x.lower() == 'true'),
 }
 
 
